@@ -8,7 +8,8 @@ namespace EmployeeWageCalculation
 {
     public class WageComputation
     {
-        const int IS_PRESENT = 0,WAGE_PER_HR=20,FULL_DAY_HR=8;
+        const int IS_PRESENT = 0,WAGE_PER_HR=20,FULL_DAY_HR=8,PART_TIME_HR=4,
+            IS_FULL_DAY_PRESENT=0, IS_PART_TIME_PRESENT=1;
         int empHrs, totalEmpWage;
         public void EmployeeAttendence()
         {
@@ -22,10 +23,14 @@ namespace EmployeeWageCalculation
         public void EmpWageCalculation()
         {
             Random random = new Random();
-            int check = random.Next(0, 2);
-            if (check == IS_PRESENT)
+            int check = random.Next(0, 3);
+            if (check == IS_FULL_DAY_PRESENT)
             {
                 empHrs = FULL_DAY_HR;
+            }
+            else if (check == IS_PART_TIME_PRESENT)
+            {
+                empHrs = PART_TIME_HR;
             }
             else
             {
