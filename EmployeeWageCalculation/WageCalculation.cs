@@ -42,7 +42,7 @@ namespace EmployeeWageCalculation
                 totalEmpWage += empHrs * WAGE_PER_HR;
             }
 
-            Console.WriteLine("Total Emp Wage for a Day :" + totalEmpWage);
+            Console.WriteLine("Total Employee Wage for a Day :" + totalEmpWage);
         }
     }
 }
