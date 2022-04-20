@@ -8,6 +8,6 @@ class Program
         WageComputation calculation = new WageComputation();
         calculation.EmployeeAttendence();
         WageComputation calculation2 = new WageComputation();
-        calculation2.EmpWageCalculation();
+        calculation2.EmpWageCalculation("Dmart", 20 , 2 , 10);
     }
 }

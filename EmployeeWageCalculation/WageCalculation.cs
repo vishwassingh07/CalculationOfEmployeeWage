@@ -8,8 +8,7 @@ namespace EmployeeWageCalculation
 {
     public class WageComputation
     {
-        const int IS_PRESENT=1, IS_ABSENT = 0 , WAGE_PER_HR=20,FULL_DAY_HR=8,PART_TIME_HR=4,
-            IS_FULL_DAY_PRESENT=1, IS_PART_TIME_PRESENT=2,WORKING_DAYS_A_MONTH=20;
+        const int IS_PRESENT=1, IS_ABSENT = 0, IS_FULL_DAY_PRESENT=1, IS_PART_TIME_PRESENT=2;
         int empHrs, totalEmpWage;
         public void EmployeeAttendence()
         {
@@ -20,29 +19,36 @@ namespace EmployeeWageCalculation
             else
                 Console.WriteLine("Employee is absent");
         }
-        public void EmpWageCalculation()
+    
+        public int EmpWageCalculation(string company, int wagePerHr, int workingDaysAMonth, int maxHrPerMonth )
         {
-            for (int i = 0; i < WORKING_DAYS_A_MONTH && empHrs<=100; i++)
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+            while (totalEmpHrs < maxHrPerMonth && totalWorkingDays < workingDaysAMonth)
             {
-
+                totalWorkingDays++;
                 Random random = new Random();
-                int check = random.Next(0, 3);
-                switch (check)
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
                 {
-                    case IS_ABSENT:
-                        empHrs = 0;
+                    case IS_PART_TIME_PRESENT:
+                        empHrs = 4;
                         break;
                     case IS_FULL_DAY_PRESENT:
-                        empHrs = FULL_DAY_HR;
+                        empHrs = 8;
                         break;
-                    case IS_PART_TIME_PRESENT:
-                        empHrs = PART_TIME_HR;
+                    default:
+                        empHrs = 0;
                         break;
                 }
-                totalEmpWage += empHrs * WAGE_PER_HR;
+                totalEmpHrs += empHrs;
+                Console.WriteLine("Day#" + totalWorkingDays + "Employee Hours " + empHrs);
+                
             }
+            int totalEmpWage = totalEmpHrs * wagePerHr;
+            Console.WriteLine("Total Employee Wage Of " + company + " is " + totalEmpWage);
+            return totalEmpWage;
 
-            Console.WriteLine("Total Employee Wage for a Day :" + totalEmpWage);
+            
         }
     }
 }
