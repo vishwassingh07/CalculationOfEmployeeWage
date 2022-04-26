@@ -9,6 +9,8 @@ namespace EmployeeWageCalculation
     public class WageComputation
     {
         const int IS_PRESENT=1, IS_ABSENT = 0, IS_FULL_DAY_PRESENT=1, IS_PART_TIME_PRESENT=2;
+        private string company;
+        private int wagePerHr, workingDaysAMonth, maxHrPerMonth;
         int empHrs, totalEmpWage;
         public void EmployeeAttendence()
         {
@@ -19,11 +21,19 @@ namespace EmployeeWageCalculation
             else
                 Console.WriteLine("Employee is absent");
         }
-    
-        public int EmpWageCalculation(string company, int wagePerHr, int workingDaysAMonth, int maxHrPerMonth )
+        public WageComputation(string company, int wagePerHr, int maxHrPerMonth, int workingDaysAMonth)
+        {
+            this.company = company;
+            this.wagePerHr = wagePerHr;
+            this.maxHrPerMonth = maxHrPerMonth;
+            this.workingDaysAMonth = workingDaysAMonth;
+            this.totalEmpWage = totalEmpWage;
+        }
+        
+        public void EmpWageCalculation()
         {
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs < maxHrPerMonth && totalWorkingDays < workingDaysAMonth)
+            while (totalEmpHrs <= this.maxHrPerMonth && totalWorkingDays <= this.workingDaysAMonth)
             {
                 totalWorkingDays++;
                 Random random = new Random();
@@ -41,14 +51,14 @@ namespace EmployeeWageCalculation
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("Day#" + totalWorkingDays + "Employee Hours " + empHrs);
-                
+                Console.WriteLine("Day#" + totalWorkingDays + " Employee Hours " + empHrs);
             }
-            int totalEmpWage = totalEmpHrs * wagePerHr;
-            Console.WriteLine("Total Employee Wage Of " + company + " is " + totalEmpWage);
-            return totalEmpWage;
-
-            
+            totalEmpWage = totalEmpHrs * this.wagePerHr;
+            Console.WriteLine("Total Employee Wage For Company :" + company + " is " + totalEmpWage);
+        }
+        public string toString()
+        {
+            return ("Total Employee Wage For Company " + this.company + " is " + this.totalEmpWage);
         }
     }
 }
